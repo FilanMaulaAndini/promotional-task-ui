@@ -1,8 +1,14 @@
 import React from "react";
 import { countUp } from "./countUp";
+import { useRef } from "react";
 
 const App: React.FC = () => {
   const count = countUp(147, 3000); // Pass in target and duration
+  const joinRef = useRef<HTMLDivElement>(null);
+
+  const scrollToJoinSection = () => {
+    joinRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
     <div className="flex justify-content-center align-items-center py-3 page-wrapper">
@@ -26,24 +32,22 @@ const App: React.FC = () => {
           <div className="col-md-7">
             <div className="d-flex flex-column justify-content-end">
               <div className="d-flex align-items-end">
-                <div className="big-count">{count}</div>
-                <h1
-                  className="text-6xl fw-bold"
-                  style={{ marginBottom: "2rem" }}
-                >
-                  M+
-                </h1>
+                <div className="big-count slide-up">{count}</div>
+                <h1 className="text-6xl fw-bold count-section-margin slide-up">M+</h1>
               </div>
-              <h1 className="text-6xl pb-5 fw-bold">
+              <h1 className="text-6xl pb-5 fw-bold fade-in">
                 Learners. One Platform. Endless Possibilities.
               </h1>
-              <div className="description">
+              <div className="description fade-in">
                 NovaLearn is where curiosity meets opportunity. Join millions of
                 learners, professionals, and dreamers who are building brighter
                 futures — one course at a time.
               </div>
               <div>
-                <button className="mt-4 px-6 py-2 rounded">
+                <button
+                  className="mt-4 px-6 py-2 rounded"
+                  onClick={scrollToJoinSection}
+                >
                   Start Learning Now
                 </button>
               </div>
@@ -55,8 +59,7 @@ const App: React.FC = () => {
                 <div className="asset-img-wrapper">
                   <img
                     src="/src/assets/asset1.png"
-                    className="video-fluid"
-                    style={{ height: "400px", objectFit: "contain" }}
+                    className="video-fluid asset-image"
                     alt="logo"
                   />
                 </div>
@@ -68,40 +71,26 @@ const App: React.FC = () => {
       </div>
 
       {/*2nd Section*/}
-      <div className="text-center" style={{ padding: "80px 3rem 80px 3rem" }}>
+      <div ref={joinRef} className="text-center join-movement-section">
         <h1>Join the Movement</h1>
-        <h4 className="py-3" style={{ color: "var(--primary-color)" }}>
+        <h4 className="py-3 quote-text">
           <i>“Learning is the only superpower that compounds over time.”</i>
         </h4>
       </div>
 
       {/*3rd Section*/}
-      <div style={{ padding: "3rem 7rem 3rem 7rem" }}>
-        <div
-          style={{
-            borderRadius: "30px",
-            background:
-              "linear-gradient(75deg, var(--accent-color), var(--secondary-color))",
-          }}
-        >
-          <div className="row p-5">
+      <div className="section-padding">
+        <div className="gradient-section">
+          <div className="row">
             <div className="col-md-4">
               <h1>What Makes NovaLearn Different?</h1>
-              <button className="mt-4 px-6 py-2 rounded">Learn More</button>
+              <button className="my-5 px-6 py-2  rounded">Learn More</button>
             </div>
             <div className="col-md-8">
               <div className="row">
                 <div className="col-md-6">
                   <div className="mb-5">
-                    <div
-                      className="d-flex justify-content-center align-items-center"
-                      style={{
-                        width: "50px",
-                        height: "50px",
-                        background: "white",
-                        borderRadius: "10px",
-                      }}
-                    >
+                    <div className="feature-icon">
                       <img src="/src/assets/mdi_world.svg" alt="logo" />
                     </div>
                     <h4 className="pt-2 fw-bold">World-Class Courses</h4>
@@ -113,15 +102,7 @@ const App: React.FC = () => {
                 </div>
                 <div className="col-md-6">
                   <div className="mb-5">
-                    <div
-                      className="d-flex justify-content-center align-items-center"
-                      style={{
-                        width: "50px",
-                        height: "50px",
-                        background: "white",
-                        borderRadius: "10px",
-                      }}
-                    >
+                    <div className="feature-icon">
                       <img
                         src="/src/assets/mingcute_time-line.svg"
                         alt="logo"
@@ -135,15 +116,7 @@ const App: React.FC = () => {
               <div className="row">
                 <div className="col-md-6">
                   <div className="mb-5">
-                    <div
-                      className="d-flex justify-content-center align-items-center"
-                      style={{
-                        width: "50px",
-                        height: "50px",
-                        background: "white",
-                        borderRadius: "10px",
-                      }}
-                    >
+                    <div className="feature-icon">
                       <img src="/src/assets/community.svg" alt="logo" />
                     </div>
                     <h4 className="pt-2 fw-bold">Global Community</h4>
@@ -155,15 +128,7 @@ const App: React.FC = () => {
                 </div>
                 <div className="col-md-6">
                   <div className="mb-5">
-                    <div
-                      className="d-flex justify-content-center align-items-center"
-                      style={{
-                        width: "50px",
-                        height: "50px",
-                        background: "white",
-                        borderRadius: "10px",
-                      }}
-                    >
+                    <div className="feature-icon">
                       <img
                         src="/src/assets/game-icons_progression.svg"
                         alt="logo"
@@ -184,69 +149,46 @@ const App: React.FC = () => {
 
       {/*4th Section*/}
       <div className="py-5">
-        <div
-          className="position-relative"
-          style={{
-            padding: "3rem 7rem 3rem 7rem",
-            background: "#F4F4FA",
-          }}
-        >
+        <div className="section-padding what-you-get">
           <img
             src="/src/assets/asset3.png"
-            className="position-absolute"
-            style={{
-              right: "5%",
-              top: "-70px",
-              height: "200px",
-              objectFit: "contain",
-            }}
-            alt="logo"
+            className="asset-top-image"
+            alt="asset3"
           />
-
-          <h1 style={{ padding: "3rem 0rem 3rem 0rem" }}>What You Will Get</h1>
-          <div className="row py-4">
-            <div className="d-flex col-md-4">
+          <h1 className="section-title">What You Will Get</h1>
+          <div className="row">
+            <div className="d-flex col-md-4 py-4">
               <div className="d-flex justify-content-center w-100">
-                <h3 style={{ width: "70px", color: "var(--accent-color)" }}>
-                  01.
-                </h3>
+                <h3 className="benefit-number">01.</h3>
                 <div>
                   Certificates, skill, and career-ready tracks to fuel
                   ambitions.
                 </div>
               </div>
             </div>
-            <div className="d-flex col-md-4">
+            <div className="d-flex col-md-4 py-4">
               <div className="d-flex justify-content-center w-100">
-                <h3 style={{ width: "60px", color: "var(--accent-color)" }}>
-                  02.
-                </h3>
+                <h3 className="benefit-number">02.</h3>
                 <div>Mobile & desktop learning</div>
               </div>
             </div>
-            <div className="d-flex col-md-4">
+            <div className="d-flex col-md-4 py-4">
               <div className="d-flex justify-content-center w-100">
-                <h3 style={{ width: "60px", color: "var(--accent-color)" }}>
-                  03.
-                </h3>
+                <h3 className="benefit-number">03.</h3>
                 <div>Downloadable resources</div>
               </div>
             </div>
           </div>
-          <div className="row py-4">
-            <div className="d-flex col-md-6">
+          <div className="row">
+            <div className="d-flex col-md-6 py-4">
               <div className="d-flex justify-content-center w-100">
-                <h3 style={{ width: "70px", color: "var(--accent-color)" }}>
-                  04.
-                </h3>
+                <h3 className="benefit-number">04.</h3>
                 <div>Discussion boards & peer collaboration</div>
               </div>
             </div>
-            <div className="d-flex col-md-6">
+            <div className="d-flex col-md-6 py-4">
               <div className="d-flex justify-content-center w-100">
-                <h3 style={{ width: "60px", color: "var(--accent-color)" }}>
-                  05.
-                </h3>
+                <h3 className="benefit-number">05.</h3>
                 <div>Certificates of completion</div>
               </div>
             </div>
@@ -255,42 +197,32 @@ const App: React.FC = () => {
       </div>
 
       {/*5th Section*/}
-      <div
-        className="position-relative"
-        style={{ padding: "3rem 7rem 3rem 7rem" }}
-      >
-        <div
-          className="p-5"
-          style={{
-            borderRadius: "30px",
-            background: "rgba(236, 118, 152, 0.4)",
-          }}
-        >
+      <div className="section-padding">
+        <div className="offer-card">
           <div className="row">
-            <div className="col-md-5">
+            <div className="col-md-5 text-center">
               <img
                 src="/src/assets/asset2.png"
-                // className="video-fluid"
-                style={{ height: "400px", width: "100%", objectFit: "contain" }}
-                alt="logo"
+                className="video-fluid asset-image"
+                alt="asset2"
               />
             </div>
             <div className="col-md-7">
               <h1 className="py-4">
                 Limited-Time Offer! Unlock Your Learning Journey Today
               </h1>
-              <h5 className="fw-light">
+              <h6 className="fw-light">
                 🔓 Get Access to All Courses — Only $1 for the First Month
-              </h5>
-              <h5 className="fw-light">
+              </h6>
+              <h6 className="fw-light">
                 🎁 Bonus: Free Certificate Included for Every Course
-              </h5>
-              <h5 className="fw-light">
+              </h6>
+              <h6 className="fw-light">
                 🔥 30% Off Your First Subscription — This Week Only
-              </h5>
-              <h5 className="fw-light">
+              </h6>
+              <h6 className="fw-light">
                 👥 Invite Friends, Get Rewards — Start Building Together
-              </h5>
+              </h6>
               <div>
                 <button className="mt-4 px-6 py-2 rounded">Claim Now</button>
               </div>
@@ -314,15 +246,9 @@ const App: React.FC = () => {
           <button className="mt-4 px-6 py-2 rounded">Learning Now</button>
         </div>
       </div>
+
       {/*Line Section*/}
-      <hr
-        style={{
-          height: "2px",
-          backgroundColor: "grey",
-          border: "none",
-          margin: "0 1.25rem", // equivalent to px-5
-        }}
-      />
+      <hr className="divider" />
 
       {/*Footer Section*/}
       <div className="d-flex justify-content-between align-items-center py-3 px-5">
