@@ -3,7 +3,7 @@ import { countUp } from "./countUp";
 import { useRef } from "react";
 
 const App: React.FC = () => {
-  const count = countUp(147, 3000); // Pass in target and duration
+  const { currentCount, done } = countUp(147, 3000); // Pass in target and duration
   const joinRef = useRef<HTMLDivElement>(null);
 
   const scrollToJoinSection = () => {
@@ -27,14 +27,21 @@ const App: React.FC = () => {
       </div>
 
       {/*1st Section*/}
+      <div className="d-flex justify-content-center px-5">
+        <div className="d-flex  position-relative">
+          <div className="d-flex align-items-end" style={{ zIndex: 10 }}>
+            <div className="big-count slide-up">{currentCount}</div>
+            {done && (
+              <h1 className="fw-bold count-section-margin slide-up">M</h1>
+            )}
+          </div>
+          <div className="gradient-circle"></div>
+        </div>
+      </div>
       <div className="p-5">
         <div className="row">
           <div className="col-md-7">
             <div className="d-flex flex-column justify-content-end">
-              <div className="d-flex align-items-end">
-                <div className="big-count slide-up">{count}</div>
-                <h1 className="text-6xl fw-bold count-section-margin slide-up">M+</h1>
-              </div>
               <h1 className="text-6xl pb-5 fw-bold fade-in">
                 Learners. One Platform. Endless Possibilities.
               </h1>
@@ -53,7 +60,7 @@ const App: React.FC = () => {
               </div>
             </div>
           </div>
-          <div className="col-md-5">
+          <div className="col-md-5 hide-on-md">
             <div className="image-section">
               <div className="position-relative">
                 <div className="asset-img-wrapper">

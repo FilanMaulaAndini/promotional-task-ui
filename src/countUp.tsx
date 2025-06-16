@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 
-export function countUp(targetValue: number, animationDuration: number): number {
+export function countUp(targetValue: number, animationDuration: number): { currentCount: number; done: boolean } {
   const [currentCount, setCurrentCount] = useState(1);
+  const [done, setDone] = useState<boolean>(false);
   const animationRef = useRef<number | null>(null);
   const animationStartRef = useRef<number | null>(null);
 
@@ -25,6 +26,8 @@ export function countUp(targetValue: number, animationDuration: number): number 
       // Continue animation if not finished
       if (progress < 1) {
         animationRef.current = requestAnimationFrame(updateCount);
+      } else {
+        setDone(true); // 💡 Mark animation as done
       }
     };
 
@@ -39,5 +42,5 @@ export function countUp(targetValue: number, animationDuration: number): number 
     };
   }, [targetValue, animationDuration]);
 
-  return currentCount;
+  return { currentCount, done } ;
 }
